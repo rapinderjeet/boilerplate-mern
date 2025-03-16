@@ -6,7 +6,12 @@ import productRoutes from "./routes/product.route.js";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
+
+if (!PORT) {
+  console.log("PORT not found in .env file");
+  process.exit(1);
+}
 
 app.use(express.json());
 
