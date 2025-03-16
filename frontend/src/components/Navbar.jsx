@@ -6,9 +6,10 @@ import { LuMoon, LuSun } from "react-icons/lu";
 import { useColorMode } from "./ui/color-mode";
 
 const Navbar = () => {
-  let { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
-    <Container >
+    <Container>
       <Flex
         h="16"
         align={"center"}
