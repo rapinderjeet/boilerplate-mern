@@ -75,7 +75,7 @@ const CreatePage = () => {
                 setProduct({ ...product, image: e.target.value })
               }
             ></Input>
-            <Button onClick={() => handleCreateProduct}>Add Product</Button>
+            <Button onClick={() => handleCreateProduct()}>Add Product</Button>
           </VStack>
         </Box>
       </VStack>
