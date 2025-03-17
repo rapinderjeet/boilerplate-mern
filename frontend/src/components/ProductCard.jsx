@@ -5,8 +5,14 @@ import {
   Image,
   Box,
   Text,
+  Dialog,
+  Button,
+  Portal,
+  CloseButton,
+  VStack,
+  Input,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { LuPencil, LuTrash } from "react-icons/lu";
 import { useColorModeValue } from "./ui/color-mode";
 import { useProductStore } from "@/store/product";
@@ -15,8 +21,10 @@ import { toaster } from "@/components/ui/toaster";
 const ProductCard = ({ product }) => {
   const textColor = useColorModeValue("gray.600", "gray.200");
   const bgColor = useColorModeValue("white", "gray.700");
+  const [open, setOpen] = useState(false);
+  const [updatedProduct, setUpdatedProduct] = useState(product);
 
-  const { deleteProduct } = useProductStore();
+  const { deleteProduct, updateProduct } = useProductStore();
   const handleDeleteProduct = async (productId) => {
     const { success, messsage } = await deleteProduct(productId);
     if (success) {
@@ -29,6 +37,24 @@ const ProductCard = ({ product }) => {
       toaster.create({
         title: "Error",
         description: messsage,
+        type: "error",
+      });
+    }
+  };
+
+  const handleUpdateProduct = async (productId) => {
+    const { success, message } = await updateProduct(updatedProduct);
+    if (success) {
+      toaster.create({
+        title: "Product updated",
+        description: message,
+        type: "success",
+      });
+      setOpen(false);
+    } else {
+      toaster.create({
+        title: "Error",
+        description: message,
         type: "error",
       });
     }
@@ -62,7 +88,7 @@ const ProductCard = ({ product }) => {
         </Text>
 
         <HStack gap={4} mt={4}>
-          <IconButton colorPalette="blue">
+          <IconButton colorPalette="blue" onClick={() => setOpen(true)}>
             <LuPencil />
           </IconButton>
           <IconButton
@@ -75,6 +101,61 @@ const ProductCard = ({ product }) => {
           </IconButton>
         </HStack>
       </Box>
+
+      <Dialog.Root lazyMount open={open} onOpenChange={(e) => setOpen(e.open)}>
+        <Portal>
+          <Dialog.Backdrop />
+          <Dialog.Positioner>
+            <Dialog.Content>
+              <Dialog.Header>
+                <Dialog.Title>Dialog Title</Dialog.Title>
+              </Dialog.Header>
+              <Dialog.Body>
+                <VStack>
+                  <Input
+                    placeholder="Name"
+                    value={updatedProduct.name}
+                    onChange={(e) =>
+                      setUpdatedProduct({ ...product, name: e.target.value })
+                    }
+                  ></Input>
+                  <Input
+                    placeholder="Price"
+                    value={updatedProduct.price}
+                    type="number"
+                    onChange={(e) =>
+                      setUpdatedProduct({ ...product, price: e.target.value })
+                    }
+                  ></Input>
+
+                  <Input
+                    placeholder="Image"
+                    value={updatedProduct.image}
+                    onChange={(e) =>
+                      setUpdatedProduct({ ...product, image: e.target.value })
+                    }
+                  ></Input>
+                </VStack>
+              </Dialog.Body>
+              <Dialog.Footer>
+                <Button
+                  onClick={() => {
+                    handleUpdateProduct(product._id);
+                  }}
+                >
+                  Update
+                </Button>
+                <Dialog.ActionTrigger asChild>
+                  <Button variant="outline">Cancel</Button>
+                </Dialog.ActionTrigger>
+              </Dialog.Footer>
+              <Dialog.CloseTrigger asChild>
+                <CloseButton size="sm" />
+              </Dialog.CloseTrigger>
+            </Dialog.Content>
+          </Dialog.Positioner>
+        </Portal>
+      </Dialog.Root>
     </Box>
   );
 };

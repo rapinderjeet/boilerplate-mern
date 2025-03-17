@@ -44,4 +44,22 @@ export const useProductStore = create((set) => ({
     }
     return { success: false, message: "Server issue" };
   },
+  updateProduct: async (product) => {
+    const res = await fetch(`api/products/${product._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product),
+    });
+    if (res.ok) {
+      set((state) => ({
+        products: state.products.map((p) =>
+          p._id === product._id ? product : p
+        ),
+      }));
+      return { success: true, message: "Product updated" };
+    }
+    return { success: false, message: "Server issue" };
+  },
 }));
