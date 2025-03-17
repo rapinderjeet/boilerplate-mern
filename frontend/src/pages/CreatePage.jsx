@@ -1,5 +1,5 @@
 import { useColorModeValue } from "@/components/ui/color-mode";
-import { productStore } from "@/store/product";
+import { useProductStore } from "@/store/product";
 import {
   Container,
   Heading,
@@ -18,7 +18,7 @@ const CreatePage = () => {
     image: "",
   });
 
-  const { createProduct } = productStore();
+  const { createProduct } = useProductStore();
   const handleCreateProduct = async () => {
     const { success, message } = await createProduct(product);
 
@@ -75,7 +75,7 @@ const CreatePage = () => {
                 setProduct({ ...product, image: e.target.value })
               }
             ></Input>
-            <Button onClick={handleCreateProduct}>Add Product</Button>
+            <Button onClick={() => handleCreateProduct}>Add Product</Button>
           </VStack>
         </Box>
       </VStack>

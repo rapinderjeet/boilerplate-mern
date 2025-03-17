@@ -9,10 +9,31 @@ import {
 import React from "react";
 import { LuPencil, LuTrash } from "react-icons/lu";
 import { useColorModeValue } from "./ui/color-mode";
+import { useProductStore } from "@/store/product";
+import { toaster } from "@/components/ui/toaster";
 
 const ProductCard = ({ product }) => {
   const textColor = useColorModeValue("gray.600", "gray.200");
   const bgColor = useColorModeValue("white", "gray.700");
+
+  const { deleteProduct } = useProductStore();
+  const handleDeleteProduct = async (productId) => {
+    const { success, messsage } = await deleteProduct(productId);
+    if (success) {
+      toaster.create({
+        title: "Product created",
+        description: messsage,
+        type: "success",
+      });
+    } else {
+      toaster.create({
+        title: "Error",
+        description: messsage,
+        type: "error",
+      });
+    }
+  };
+
   return (
     <Box
       maxW="sm"
@@ -44,7 +65,12 @@ const ProductCard = ({ product }) => {
           <IconButton colorPalette="blue">
             <LuPencil />
           </IconButton>
-          <IconButton colorPalette="red">
+          <IconButton
+            colorPalette="red"
+            onClick={() => {
+              handleDeleteProduct(product._id);
+            }}
+          >
             <LuTrash />
           </IconButton>
         </HStack>
