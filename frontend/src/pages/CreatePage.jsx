@@ -1,5 +1,5 @@
 import { useColorModeValue } from "@/components/ui/color-mode";
-import { userProductStore } from "@/store/product";
+import { productStore } from "@/store/product";
 import {
   Container,
   Heading,
@@ -18,29 +18,25 @@ const CreatePage = () => {
     image: "",
   });
 
-  const { createProduct } = userProductStore();
+  const { createProduct } = productStore();
   const handleCreateProduct = async () => {
-
-    toaster.create({
-      title: "Product created",
-      description: "Product created successfully",
-      status: "success",
-      isClosable: true,
-    });
-    return;
     const { success, message } = await createProduct(product);
 
     if (success) {
       toaster.create({
+        title: "Product created",
         description: "Product created successfully",
         type: "success",
       });
     } else {
       toaster.create({
-        description: "Product creating error",
-        type: "warning",
+        title: "Error",
+        description: "Product creation error!",
+        type: "error",
       });
     }
+
+    setProduct({ name: "", price: "", image: "" });
   };
 
   return (

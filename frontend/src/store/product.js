@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export const userProductStore = create((set) => ({
+export const productStore = create((set) => ({
   products: [],
   setProducts: (products) => set({ products }),
   createProduct: async (product) => {
@@ -22,5 +22,14 @@ export const userProductStore = create((set) => ({
     } else {
       return { success: false, message: "Server issue" };
     }
+  },
+  fetchProducts: async () => {
+    const res = await fetch("api/products");
+    const data = await res.json();
+    if (res.ok) {
+      set({ products: data.data });
+      return { success: true, message: "Ok", data: data.data };
+    }
+    return { success: false, message: "Server issue" };
   },
 }));
