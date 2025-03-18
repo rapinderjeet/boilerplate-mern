@@ -19,8 +19,8 @@ import { useProductStore } from "@/store/product";
 import { toaster } from "@/components/ui/toaster";
 
 const ProductCard = ({ product }) => {
-  const textColor = useColorModeValue("gray.600", "gray.200");
-  const bgColor = useColorModeValue("white", "gray.700");
+  const textColor = useColorModeValue("gray.600", "gray.600");
+  const bgColor = useColorModeValue("white", "#C7D9DD");
   const [open, setOpen] = useState(false);
   const [updatedProduct, setUpdatedProduct] = useState(product);
 
@@ -81,18 +81,18 @@ const ProductCard = ({ product }) => {
       ></Image>
 
       <Box p="6">
-        <Heading size="md">{product.name}</Heading>
+        <Heading size="md" color={textColor}>{product.name}</Heading>
 
         <Text fontWeight={"bold"} fontSize={"xl"} color={textColor}>
           ${product.price}
         </Text>
 
         <HStack gap={4} mt={4}>
-          <IconButton colorPalette="blue" onClick={() => setOpen(true)}>
+          <IconButton bg="#5F99AE" onClick={() => setOpen(true)}>
             <LuPencil />
           </IconButton>
           <IconButton
-            colorPalette="red"
+            bg="#D76C82"
             onClick={() => {
               handleDeleteProduct(product._id);
             }}

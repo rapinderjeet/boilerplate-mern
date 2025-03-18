@@ -1,6 +1,6 @@
 import ProductCard from "@/components/ProductCard";
 import { useProductStore } from "@/store/product";
-import { Container, VStack, Text, SimpleGrid } from "@chakra-ui/react";
+import { Container, VStack, Text, SimpleGrid, Heading } from "@chakra-ui/react";
 import { React, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -14,9 +14,9 @@ const HomePage = () => {
   return (
     <Container py={12}>
       <VStack>
-        <Text>Products List</Text>
+        <Heading mb={10}>Products</Heading>
 
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={10} w={"full"}>
+        <SimpleGrid columns={4} gap="40px">
           {products.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
