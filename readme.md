@@ -1,6 +1,6 @@
 # Boilerplate Project with Express, React, Vite, Chakra UI, and Zustand
 
-This repository is a boilerplate project designed to streamline the development of full-stack web applications.
+A product showcase application built with React, Vite, and Chakra UI, featuring dynamic product cards with edit and delete actions. The backend is powered by Express, and Zustand is used for efficient state management. Focuses on UI design, API integration, and component architecture.
 
 ## Tech Stack
 
