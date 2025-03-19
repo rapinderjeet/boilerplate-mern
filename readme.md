@@ -12,6 +12,10 @@ A product showcase application built with React, Vite, and Chakra UI, featuring 
 
 ---
 
+![Project Image](https://raw.githubusercontent.com/rapinderjeet/ilearn-mern-products/main/project-image.png)
+
+---
+
 ## Getting Started
 
 ### Prerequisites
