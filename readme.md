@@ -1,3 +1,5 @@
+![Project Image](https://raw.githubusercontent.com/rapinderjeet/ilearn-mern-products/main/project-image.png)
+
 # Project with Express, React, Vite, Chakra UI, and Zustand
 
 A product showcase application built with React, Vite, and Chakra UI, featuring dynamic product cards with edit and delete actions. The backend is powered by Express, and Zustand is used for efficient state management. Focuses on UI design, API integration, and component architecture.
@@ -9,10 +11,6 @@ A product showcase application built with React, Vite, and Chakra UI, featuring 
 - **Vite** - Fast and efficient build tool for modern web projects.
 - **Chakra UI** - UI component library for accessible and flexible styling.
 - **Zustand** - Lightweight state management library for React.
-
----
-
-![Project Image](https://raw.githubusercontent.com/rapinderjeet/ilearn-mern-products/main/project-image.png)
 
 ---
 
